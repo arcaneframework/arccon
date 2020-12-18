@@ -147,16 +147,6 @@ endif()
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 
-# désactivation des packages par -DDisablePackages=xx;yy;zz...
-# et activation par -DEnablePackages=xx;yy;zz...
-managePackagesActivation()
-
-# activation des métas par -DEnableMetas=xx;yy;zz...
-manageMetasActivation()
-
-# ----------------------------------------------------------------------------
-# ----------------------------------------------------------------------------
-
 # ----------------------------------------------------------------------------
 # Local Variables:
 # tab-width: 2

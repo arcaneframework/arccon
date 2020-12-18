@@ -11,13 +11,7 @@ macro(message_separator)
 endmacro()
 
 # commandes internes
-include(${COMMAND_PATH}/internal/copyAllDllFromTarget.cmake)
-include(${COMMAND_PATH}/internal/copyOneDllFile.cmake)
-include(${COMMAND_PATH}/internal/linkWholeArchiveLibraries.cmake)
 include(${COMMAND_PATH}/internal/appendCompileOption.cmake)
-include(${COMMAND_PATH}/internal/managePackagesActivation.cmake)
-include(${COMMAND_PATH}/internal/manageMetasActivation.cmake)
-include(${COMMAND_PATH}/internal/generateDynamicLoading.cmake)
 
 # commandes avancées (pour écriture dees packages/metas/options/langages)
 include(${COMMAND_PATH}/advanced/createOption.cmake)
