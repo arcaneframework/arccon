@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------------
 
 if(${PACKAGE_FILE})
-  
+
   if(IS_ABSOLUTE ${PACKAGE_FILE_VALUE})
     set(file ${PACKAGE_FILE_VALUE})
   else()
@@ -10,9 +10,9 @@ if(${PACKAGE_FILE})
   endif()
 
   if(NOT EXISTS ${file})
-    logFatalError("Package file ${file} doesn't exist")
+    message(FATAL_ERROR "Package file ${file} doesn't exist")
   endif()
-  
+
   include(${file})
 
 endif()

@@ -1,11 +1,11 @@
 function(copyAllDllFromTarget target)
 
   if(NOT TARGET ${target})
-    logFatalError("target ${target} not defined")
+    message(FATAL_ERROR "target ${target} not defined")
   endif()
 
   string(TOUPPER ${target} TARGET)
-  
+
   foreach(lib ${${TARGET}_LIBRARIES})
     if(${lib} STREQUAL optimized)
       continue()
@@ -31,5 +31,5 @@ function(copyAllDllFromTarget target)
       copyOneDllFile(${dll})
     endforeach()
   endforeach()
-  
+
 endfunction()

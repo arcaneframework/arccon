@@ -24,7 +24,7 @@ if(WIN32)
   set(DOTNET_FRAMEWORK_PATH ${DOTNET_FRAMEWORK_ROOT}/${DOTNET_FRAMEWORK_VERSION})
 
   if(NOT DOTNET_FRAMEWORK_VERSION)
-    logFatalError("Can not find a valid installed Microsoft.NET framework")
+    message(FATAL_ERROR "Can not find a valid installed Microsoft.NET framework")
   elseif(VERBOSE)
     logStatus("Found .NET Framework ${DOTNET_FRAMEWORK_PATH}")
   endif()

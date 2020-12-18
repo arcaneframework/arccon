@@ -3,19 +3,19 @@ macro(loadMeta)
   set(options)
   set(oneValueArgs NAME)
   set(multiValueArgs)
-  
+
   cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  
+
   if(ARGS_UNPARSED_ARGUMENTS)
-    logFatalError("unparsed arguments '${ARGS_UNPARSED_ARGUMENTS}'")
+    message(FATAL_ERROR "unparsed arguments '${ARGS_UNPARSED_ARGUMENTS}'")
   endif()
- 
+
   if(NOT ARGS_NAME)
-    logFatalError("create_meta needs NAME")
+    message(FATAL_ERROR "create_meta needs NAME")
   endif()
- 
+
   if(TARGET ARGS_NAME)
-    logFatalError("target ${ARGS_NAME} for meta already defined")
+    message(FATAL_ERROR "target ${ARGS_NAME} for meta already defined")
   endif()
 
   string(TOLOWER ${ARGS_NAME} target)
@@ -26,12 +26,12 @@ macro(loadMeta)
     add_library(${target} INTERFACE)
     set(${target}_IS_META ON)
     set(${TARGET}_FOUND ON)
-	
+
     get_property(TARGETS GLOBAL PROPERTY ${PROJECT_NAME}_TARGETS)
     list(APPEND TARGETS ${target})
     list(REMOVE_DUPLICATES TARGETS)
 	  set_property(GLOBAL PROPERTY ${PROJECT_NAME}_TARGETS ${TARGETS})
-	
+
   endif()
-  
+
 endmacro()

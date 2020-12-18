@@ -6,7 +6,7 @@
 # outillage cmake
 include(CMakeParseArguments)
 include(FindPackageHandleStandardArgs)
-include(GenerateExportHeader)  
+include(GenerateExportHeader)
 include(CheckCXXCompilerFlag)
 
 # ----------------------------------------------------------------------------
@@ -16,46 +16,46 @@ get_filename_component(BUILD_SYSTEM_PATH ${CMAKE_CURRENT_LIST_FILE} PATH)
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
- 
-find_program(PKGLIST_LOADER 
-  NAMES PkgListLoader.exe 
+
+find_program(PKGLIST_LOADER
+  NAMES PkgListLoader.exe
   PATHS ${BUILD_SYSTEM_PATH}/bin
   NO_DEFAULT_PATH
   )
 find_program(WHOLEARCHIVE_VCPROJ_TOOL
   NAMES WholeArchiveVCProj.exe
   HINTS ${BUILD_SYSTEM_PATH}/bin
-  NO_DEFAULT_PATH	
+  NO_DEFAULT_PATH
   )
 find_program(CMAKELIST_GENERATOR
   NAMES CMakeListGenerator.exe
   HINTS ${BUILD_SYSTEM_PATH}/bin
-  NO_DEFAULT_PATH 
+  NO_DEFAULT_PATH
   )
 find_program(ECLIPSECDT_GENERATOR
   NAMES EclipseCDTSettings.exe
   HINTS ${BUILD_SYSTEM_PATH}/bin
-  NO_DEFAULT_PATH 
+  NO_DEFAULT_PATH
   )
 if(WIN32)
   find_program(WINDOWS_PATH_RESOLVER_TOOL
     NAMES WindowsPathResolver.exe
     HINTS ${BUILD_SYSTEM_PATH}/bin
-    NO_DEFAULT_PATH 
+    NO_DEFAULT_PATH
     )
 endif()
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
- 
+
 if(NOT CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR}/install/${PROJECT_VERSION} 
+  set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR}/install/${PROJECT_VERSION}
       CACHE PATH "Default install path" FORCE)
 endif()
 
 # compilation dans les sources interdites
 if(${PROJECT_BINARY_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
-  logFatalError("You can not do in-source compilation. You have to build in a directory distinct from the source directory")
+  message(FATAL_ERROR "You can not do in-source compilation. You have to build in a directory distinct from the source directory")
 endif()
 
 # où sont placés le exe  et les libs
@@ -72,7 +72,7 @@ file(MAKE_DIRECTORY ${BUILDSYSTEM_DLL_COPY_DIRECTORY})
 
 if(BUILDSYSTEM_NO_CONFIGURATION_OUTPUT_DIRECTORY)
   foreach(config ${CMAKE_CONFIGURATION_TYPES})
-    string(TOUPPER ${config} CONFIG) 
+    string(TOUPPER ${config} CONFIG)
     # les dlls/libs/exe ne sont pas placés dans des répertoires de configuration
     # Pour Visual/XCode, pas de chemin bin/Release ou lib/Release (par exemple)
     # NB: Sous linux, cela ne change rien
@@ -81,7 +81,7 @@ if(BUILDSYSTEM_NO_CONFIGURATION_OUTPUT_DIRECTORY)
   endforeach()
 endif()
 
-# rpath 
+# rpath
 SET(CMAKE_SKIP_BUILD_RPATH OFF)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)

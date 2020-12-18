@@ -1,25 +1,25 @@
 macro(appendCompileOption)
-  
+
   set(options        )
   set(oneValueArgs   )
   set(multiValueArgs FLAG CONFIGURATION LANGUAGE)
-  
+
   cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  
+
   if(ARGS_UNPARSED_ARGUMENTS)
-    logFatalError("append_compile_option error, unparsed arguments")
+    message(FATAL_ERROR "append_compile_option error, unparsed arguments")
   endif()
 
   if(NOT ARGS_FLAG)
-    logFatalError("append_compile_option needs FLAG")
+    message(FATAL_ERROR "append_compile_option needs FLAG")
   endif()
 
   if(NOT ARGS_CONFIGURATION)
-    set(ARGS_CONFIGURATION DEBUG RELEASE) 
+    set(ARGS_CONFIGURATION DEBUG RELEASE)
   endif()
 
   if(NOT ARGS_LANGUAGE)
-    set(ARGS_LANGUAGE CXX CC) 
+    set(ARGS_LANGUAGE CXX CC)
   endif()
 
   foreach(flag ${ARGS_FLAG})

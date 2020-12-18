@@ -4,7 +4,6 @@ set(COMMAND_PATH ${CMAKE_CURRENT_LIST_DIR})
 
 include(${COMMAND_PATH}/internal/color.cmake)
 
-include(${COMMAND_PATH}/user/logFatalError.cmake)
 include(${COMMAND_PATH}/user/logWarning.cmake)
 include(${COMMAND_PATH}/user/logStatus.cmake)
 

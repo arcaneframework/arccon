@@ -3,30 +3,30 @@ function(importPackageXmlFile)
   set(options)
   set(oneValueArgs TARGET XML)
   set(multiValueArgs)
-  
+
   cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-  
+
   if(ARGS_UNPARSED_ARGUMENTS)
-    logFatalError("unparsed arguments '${ARGS_UNPARSED_ARGUMENTS}'")
+    message(FATAL_ERROR "unparsed arguments '${ARGS_UNPARSED_ARGUMENTS}'")
   endif()
 
-  if(NOT ARGS_TARGET) 
-    logFatalError("import_targets error, target is undefined")
+  if(NOT ARGS_TARGET)
+    message(FATAL_ERROR "import_targets error, target is undefined")
   endif()
 
-  if(NOT ARGS_XML) 
-    logFatalError("import_targets error, from is undefined")
+  if(NOT ARGS_XML)
+    message(FATAL_ERROR "import_targets error, from is undefined")
   endif()
 
-  execute_process(COMMAND ${MONO_EXEC} 
+  execute_process(COMMAND ${MONO_EXEC}
     ${PKGLIST_LOADER}
     ${ARGS_XML}
     ${PROJECT_BINARY_DIR}/${ARGS_TARGET}.cmake
     --add_prefix
     )
-  
+
   include(${PROJECT_BINARY_DIR}/${ARGS_TARGET}.cmake)
-  
+
   set(conflicts OFF)
 
   foreach(TARGET ${DELEGATED_DEPENDENCIES})
@@ -35,19 +35,19 @@ function(importPackageXmlFile)
       if(NOT ${target}_IS_DISABLED)
         add_library(${target} INTERFACE IMPORTED)
         if(XML_${TARGET}_LIBRARIES)
-          set_property(TARGET ${target} APPEND PROPERTY 
+          set_property(TARGET ${target} APPEND PROPERTY
             INTERFACE_LINK_LIBRARIES "${XML_${TARGET}_LIBRARIES}")
 		      set(${TARGET}_LIBRARIES ${XML_${TARGET}_LIBRARIES})
           set(${TARGET}_LIBRARIES ${${TARGET}_LIBRARIES} PARENT_SCOPE)
         endif()
         if(XML_${TARGET}_INCLUDE_DIRS)
-          set_property(TARGET ${target} APPEND PROPERTY 
+          set_property(TARGET ${target} APPEND PROPERTY
             INTERFACE_INCLUDE_DIRECTORIES "${XML_${TARGET}_INCLUDE_DIRS}")
 		      set(${TARGET}_INCLUDE_DIRS ${XML_${TARGET}_INCLUDE_DIRS})
           set(${TARGET}_INCLUDE_DIRS ${${TARGET}_INCLUDE_DIRS} PARENT_SCOPE)
         endif()
         if(XML_${TARGET}_FLAGS)
-          set_property(TARGET ${target} APPEND PROPERTY 
+          set_property(TARGET ${target} APPEND PROPERTY
             INTERFACE_COMPILE_DEFINITIONS "${XML_${TARGET}_FLAGS}")
           set(${TARGET}_FLAGS ${XML_${TARGET}_FLAGS})
           set(${TARGET}_FLAGS ${${TARGET}_FLAGS} PARENT_SCOPE)
@@ -57,7 +57,7 @@ function(importPackageXmlFile)
         if(WIN32)
 	        copyAllDllFromTarget(${target})
         endif()
-	      set_property(TARGET ${ARGS_TARGET} APPEND PROPERTY 
+	      set_property(TARGET ${ARGS_TARGET} APPEND PROPERTY
           INTERFACE_LINK_LIBRARIES "${target}")
       endif()
       list(APPEND ${PROJECT_NAME}_TARGETS ${target})
