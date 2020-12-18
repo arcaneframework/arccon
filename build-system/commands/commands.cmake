@@ -1,4 +1,4 @@
-# commandes pour l'affichage 
+# commandes pour l'affichage
 
 set(COMMAND_PATH ${CMAKE_CURRENT_LIST_DIR})
 
@@ -38,4 +38,3 @@ include(${COMMAND_PATH}/advanced/generateEclipseCDTXmlFile.cmake)
 include(${COMMAND_PATH}/user/RegisterPackageLibrary.cmake)
 include(${COMMAND_PATH}/user/findLegacyPackage.cmake)
 include(${COMMAND_PATH}/user/installDirectory.cmake)
-
