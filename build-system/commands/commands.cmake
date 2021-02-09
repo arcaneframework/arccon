@@ -15,15 +15,6 @@ include(${COMMAND_PATH}/internal/appendCompileOption.cmake)
 
 # commandes avancées (pour écriture dees packages/metas/options/langages)
 include(${COMMAND_PATH}/advanced/createOption.cmake)
-include(${COMMAND_PATH}/advanced/printOptionInformations.cmake)
-include(${COMMAND_PATH}/advanced/loadLanguage.cmake)
-include(${COMMAND_PATH}/advanced/printLanguageInformations.cmake)
-include(${COMMAND_PATH}/advanced/loadMeta.cmake)
-include(${COMMAND_PATH}/advanced/enablePackage.cmake)
-include(${COMMAND_PATH}/advanced/disablePackage.cmake)
-include(${COMMAND_PATH}/advanced/importPackageXmlFile.cmake)
-include(${COMMAND_PATH}/advanced/generatePackageXmlFile.cmake)
-include(${COMMAND_PATH}/advanced/generateEclipseCDTXmlFile.cmake)
 
 
 # commandes pour l'utilisateur (écriture de CMakeLists.txt)
